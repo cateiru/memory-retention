@@ -1,0 +1,18 @@
+
+GET http://localhost:8080
+
+###
+
+GET http://localhost:8080/create
+
+###
+
+GET http://localhost:8080/add?key=805323355282a8c1325e3ed24438ca689b56def17ae4a7230884a2cd39b3ed2a
+
+###
+
+GET  http://localhost:8080/get?key=805323355282a8c1325e3ed24438ca689b56def17ae4a7230884a2cd39b3ed2a
+
+###
+
+GET
