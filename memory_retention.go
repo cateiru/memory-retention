@@ -11,6 +11,9 @@ var mutex = &sync.Mutex{}
 // - Key is a hash value that identifies an individual.
 var data = make(map[string][]string)
 
+// Topics specified by the presenter.
+var topics = make(map[string]string)
+
 // Save whether the key is in use.
 // If the key does not exist in this map, it is not used.
 var keyMap = make(map[string]bool)
@@ -108,4 +111,38 @@ func GetAnswer(key string) ([]string, error) {
 	mutex.Unlock()
 
 	return answer, nil
+}
+
+// Set a topic.
+//
+// Arguments:
+// key {string} - Key value.
+// value {string} - topic
+func SetTopic(key string, value string) error {
+	mutex.Lock()
+	if err := exist(key); err != nil {
+		return err
+	}
+	topics[key] = value
+	mutex.Unlock()
+
+	return nil
+}
+
+// Get topic
+//
+// Arguments:
+// key {string} - key value.
+//
+// Returns:
+// {string} - topic.
+func GetTopic(key string) (string, error) {
+	mutex.Lock()
+	if err := exist(key); err != nil {
+		return "", err
+	}
+	topic := topics[key]
+	mutex.Unlock()
+
+	return topic, nil
 }
