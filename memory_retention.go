@@ -40,6 +40,7 @@ func DeleteKey(key string) error {
 
 	delete(keyMap, key)
 	delete(data, key)
+	delete(topics, key)
 	mutex.Unlock()
 	return nil
 }
@@ -62,6 +63,7 @@ func DeleteAnswer(key string) error {
 func DeleteAll() {
 	data = make(map[string][]string)
 	keyMap = make(map[string]bool)
+	topics = make(map[string]string)
 }
 
 // Check if the key exists.
