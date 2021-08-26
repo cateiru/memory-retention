@@ -1,12 +1,8 @@
 package memory_retention
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
 	"fmt"
-	"strings"
 	"sync"
-	"time"
 )
 
 var mutex = &sync.Mutex{}
@@ -22,24 +18,11 @@ var keyMap = make(map[string]bool)
 // Create a key.
 //
 // Arguments:
-// seed {string} - Seed value for generating the key.
-//
-// Returns:
-// {string} - The generated hash value. Use this value to add/remove values.
-func CreateKey(seed string) (string, error) {
-	var strBuild strings.Builder
-
-	strBuild.WriteString(seed)
-	strBuild.WriteString(time.Now().String())
-
-	result := sha256.Sum256([]byte(strBuild.String()))
-	hash := hex.EncodeToString(result[:])
-
+// hash {string} - hash value.
+func CreateKey(hash string) {
 	mutex.Lock()
 	keyMap[hash] = true
 	mutex.Unlock()
-
-	return hash, nil
 }
 
 // Deletes the specified key.

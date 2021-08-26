@@ -13,12 +13,8 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 func createHandler(w http.ResponseWriter, r *http.Request) {
 	ip := r.RemoteAddr
-	result, err := memory_retention.CreateKey(ip)
-	if err != nil {
-		fmt.Fprintln(w, err)
-		return
-	}
-	fmt.Fprintln(w, result)
+	memory_retention.CreateKey(ip)
+	fmt.Fprintln(w, ip)
 }
 
 func addHandler(w http.ResponseWriter, r *http.Request) {
